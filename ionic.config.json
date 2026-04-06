@@ -1,0 +1,7 @@
+{
+  "name": "vincula-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
