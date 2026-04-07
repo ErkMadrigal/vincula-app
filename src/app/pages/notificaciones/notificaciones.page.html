@@ -1,0 +1,54 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="cargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 class="header-title">Avisos 📢</h1>
+    <p class="header-sub">{{ avisos.length }} avisos vigentes</p>
+  </div>
+
+  <!-- Lista -->
+  <div class="section">
+
+    <ng-container *ngIf="loading">
+      <div *ngFor="let s of [1,2,3]" class="aviso-skeleton">
+        <ion-skeleton-text animated style="width:100%;height:80px;border-radius:16px"></ion-skeleton-text>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!loading">
+      <div *ngFor="let a of avisos" class="aviso-card" [class.expirado]="!vigente(a)">
+        <div class="aviso-header">
+          <div class="aviso-icon">
+            <ion-icon name="megaphone-outline"></ion-icon>
+          </div>
+          <div class="aviso-meta">
+            <p class="aviso-titulo">{{ a.titulo }}</p>
+            <p class="aviso-autor">{{ a.autor }}</p>
+          </div>
+          <div class="aviso-badges">
+            <span *ngIf="a.grado" class="badge-grado">{{ a.grado }}° {{ a.grupo }}</span>
+            <span *ngIf="!a.grado" class="badge-general">General</span>
+          </div>
+        </div>
+        <p class="aviso-desc">{{ a.descripcion }}</p>
+        <div class="aviso-footer">
+          <p class="aviso-fecha">{{ fechaFormato(a.created_at) }}</p>
+          <span *ngIf="a.vigencia" class="aviso-vigencia"
+            [class.vigente]="vigente(a)"
+            [class.expirada]="!vigente(a)">
+            {{ vigente(a) ? 'Vigente hasta ' + fechaFormato(a.vigencia) : 'Expirado' }}
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="avisos.length === 0" class="empty">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <p>Sin avisos por el momento</p>
+      </div>
+    </ng-container>
+
+  </div>
+</ion-content>

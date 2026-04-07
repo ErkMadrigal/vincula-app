@@ -1,0 +1,131 @@
+ <ion-content>
+      <ion-refresher slot="fixed" (ionRefresh)="cargar($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+      <!-- Header -->
+      <div class="header">
+        <div class="header-top">
+          <div>
+            <p class="header-greeting">Super Admin 👑</p>
+            <h1 class="header-name">{{ usuario?.nombre?.split(' ')[0] }}</h1>
+          </div>
+          <button class="icon-btn" (click)="logout()">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </button>
+        </div>
+
+        <!-- Ingreso mensual destacado -->
+        <div class="ingreso-card">
+          <p class="ingreso-label">Ingreso mensual total</p>
+          <p class="ingreso-monto">${{ formatMoney(totales.ingreso_mes) }}</p>
+          <p class="ingreso-anio">${{ formatMoney(totales.ingreso_anio) }} proyectado al año</p>
+        </div>
+      </div>
+
+      <!-- Métricas globales -->
+      <div class="section">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon metric-blue">
+              <ion-icon name="business-outline"></ion-icon>
+            </div>
+            <p class="metric-value">{{ totales.escuelas }}</p>
+            <p class="metric-label">Escuelas activas</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon metric-purple">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+            <p class="metric-value">{{ totales.alumnos }}</p>
+            <p class="metric-label">Total alumnos</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon metric-green">
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+            <p class="metric-value">{{ totales.alumnos_pagados }}</p>
+            <p class="metric-label">Al corriente</p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon metric-red">
+              <ion-icon name="trending-up-outline"></ion-icon>
+            </div>
+            <p class="metric-value">{{ totales.alumnos_bloqueados }}</p>
+            <p class="metric-label">Sin pago</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Potencial -->
+      <div class="section">
+        <div class="potencial-card">
+          <p class="potencial-label">💰 Potencial si todos pagan</p>
+          <p class="potencial-monto">${{ formatMoney(totales.alumnos * 15) }}/mes</p>
+          <div class="progress-bar">
+            <div class="progress-fill"
+              [style.width]="porcentajePago + '%'">
+            </div>
+          </div>
+          <p class="progress-label">{{ porcentajePago }}% de alumnos al corriente</p>
+        </div>
+      </div>
+
+      <!-- Escuelas -->
+      <div class="section">
+        <h2 class="section-title">Escuelas</h2>
+
+        <ng-container *ngIf="loading">
+          <div *ngFor="let s of [1,2,3]" class="escuela-card">
+            <ion-skeleton-text animated style="width:100%;height:60px;border-radius:12px"></ion-skeleton-text>
+          </div>
+        </ng-container>
+
+        <div *ngFor="let e of escuelas" class="escuela-card">
+          <div class="escuela-header">
+            <div class="escuela-icon">
+              <ion-icon name="school-outline"></ion-icon>
+            </div>
+            <div class="escuela-info">
+              <p class="escuela-nombre">{{ e.nombre }}</p>
+              <p class="escuela-sub">{{ e.subdominio }}.vincula.com.mx</p>
+            </div>
+            <span class="escuela-estado" [class.activa]="e.activa == 1">
+              {{ e.activa == 1 ? 'Activa' : 'Inactiva' }}
+            </span>
+          </div>
+          <div class="escuela-metrics">
+            <div class="em-item">
+              <p class="em-value">{{ e.total_alumnos }}</p>
+              <p class="em-label">Alumnos</p>
+            </div>
+            <div class="em-item">
+              <p class="em-value">{{ e.alumnos_pagados }}</p>
+              <p class="em-label">Pagados</p>
+            </div>
+            <div class="em-item">
+              <p class="em-value green">${{ formatMoney(e.alumnos_pagados * 15) }}</p>
+              <p class="em-label">Ingreso</p>
+            </div>
+            <div class="em-item">
+              <p class="em-value">
+                {{ e.total_alumnos > 0 ? Math.round(e.alumnos_pagados / e.total_alumnos * 100) : 0 }}%
+              </p>
+              <p class="em-label">% pagado</p>
+            </div>
+          </div>
+          <!-- Barra progreso por escuela -->
+          <div class="progress-bar mt-2">
+            <div class="progress-fill"
+              [style.width]="(e.total_alumnos > 0 ? Math.min(Math.round(e.alumnos_pagados / e.total_alumnos * 100), 100) : 0) + '%'">
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!loading && escuelas.length === 0" class="empty-state">
+          <ion-icon name="business-outline" class="empty-icon"></ion-icon>
+          <p>Sin escuelas registradas</p>
+        </div>
+      </div>
+
+    </ion-content>

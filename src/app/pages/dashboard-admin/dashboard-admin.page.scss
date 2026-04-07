@@ -1,0 +1,253 @@
+ion-content { --background: #F8F7FC; }
+
+.header {
+  background: linear-gradient(135deg, #1E1252, #6B4FBB);
+  padding: 52px 20px 20px;
+  border-radius: 0 0 28px 28px;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-role {
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  margin: 0 0 2px;
+}
+
+.header-name {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+
+.header-date {
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.scan-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  ion-icon { font-size: 22px; }
+}
+
+.quick-metrics {
+  background: rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.qm-item { text-align: center; }
+
+.qm-value {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  &.green  { color: #6EFFC8; }
+  &.orange { color: #FFD580; }
+  &.red    { color: #FF8A8A; }
+  &.purple { color: #C8C3FF; }
+}
+
+.qm-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+.qm-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.15);
+}
+
+.section {
+  padding: 16px 16px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1E1252;
+  margin: 0;
+}
+
+.section-count {
+  font-size: 12px;
+  font-weight: 600;
+  background: #EEEDFE;
+  color: #6B4FBB;
+  padding: 2px 8px;
+  border-radius: 20px;
+  &.red-count { background: #FCEBEB; color: #A32D2D; }
+}
+
+.pagos-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(107,79,187,0.06);
+}
+
+.pagos-label {
+  font-size: 12px;
+  color: #9B89D4;
+  margin: 0 0 4px;
+}
+
+.pagos-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1E1252;
+  margin: 0 0 4px;
+}
+
+.pagos-ingreso {
+  font-size: 12px;
+  color: #0F6E56;
+  margin: 0;
+}
+
+.pagos-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6B4FBB, #9B89D4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagos-pct {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.list-item {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(107,79,187,0.04);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.item-info { flex: 1; min-width: 0; }
+
+.item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E1252;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-sub {
+  font-size: 11px;
+  color: #9B89D4;
+  margin: 0;
+}
+
+.item-right { text-align: right; flex-shrink: 0; }
+
+.item-time {
+  font-size: 10px;
+  color: #C4B8F0;
+  margin: 4px 0 0;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.skeleton-list { }
+
+.skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.aviso-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(107,79,187,0.04);
+}
+
+.aviso-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E1252;
+  margin: 0 0 4px;
+}
+
+.aviso-sub {
+  font-size: 11px;
+  color: #9B89D4;
+  margin: 0;
+}
+
+.empty-text {
+  text-align: center;
+  color: #C4B8F0;
+  font-size: 13px;
+  padding: 16px 0;
+}

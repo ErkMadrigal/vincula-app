@@ -1,0 +1,152 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="cargarAsistencias()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="hijo-avatar">{{ hijo?.nombre?.split(' ').slice(0,2).map((n:any) => n[0]).join('') }}</div>
+    <h1 class="hijo-nombre">{{ hijo?.nombre }}</h1>
+    <p class="hijo-grado">{{ hijo?.grado }}° Grado — Grupo {{ hijo?.grupo }}</p>
+    <span class="hijo-badge" [class.badge-green]="hijo?.pagado == 1" [class.badge-red]="hijo?.pagado == 0">
+      {{ hijo?.pagado == 1 ? 'Al corriente' : 'Pago pendiente' }}
+    </span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-bar">
+    <button class="tab-btn" [class.active]="tab === 'asistencias'" (click)="cambiarTab('asistencias')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      Asistencias
+    </button>
+    <button class="tab-btn" [class.active]="tab === 'incidencias'" (click)="cambiarTab('incidencias')">
+      <ion-icon name="warning-outline"></ion-icon>
+      Incidencias
+    </button>
+    <button class="tab-btn" [class.active]="tab === 'calificaciones'" (click)="cambiarTab('calificaciones')">
+      <ion-icon name="document-text-outline"></ion-icon>
+      Califs
+    </button>
+    <button class="tab-btn" [class.active]="tab === 'avisos'" (click)="cambiarTab('avisos')">
+      <ion-icon name="megaphone-outline"></ion-icon>
+      Avisos
+    </button>
+  </div>
+
+  <!-- ASISTENCIAS -->
+  <div *ngIf="tab === 'asistencias'" class="section">
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <button class="filtro-btn" [class.active]="filtroAsist === 'semana'"
+        (click)="filtroAsist = 'semana'; aplicarFiltro()">Esta semana</button>
+      <button class="filtro-btn" [class.active]="filtroAsist === 'mes'"
+        (click)="filtroAsist = 'mes'; aplicarFiltro()">Este mes</button>
+      <button class="filtro-btn" [class.active]="filtroAsist === 'rango'"
+        (click)="filtroAsist = 'rango'">Rango</button>
+    </div>
+
+    <!-- Selector de rango -->
+    <div *ngIf="filtroAsist === 'rango'" class="rango-picker">
+      <div class="rango-field">
+        <label>Desde</label>
+        <input type="date" [(ngModel)]="rangoDesde" class="date-input" />
+      </div>
+      <div class="rango-field">
+        <label>Hasta</label>
+        <input type="date" [(ngModel)]="rangoHasta" class="date-input" />
+      </div>
+      <button class="btn-buscar" (click)="aplicarFiltro()"
+        [disabled]="!rangoDesde || !rangoHasta">Buscar</button>
+    </div>
+
+    <!-- Métricas -->
+    <div class="metricas-row">
+      <div class="metrica-card green">
+        <p class="metrica-val">{{ entradas }}</p>
+        <p class="metrica-label">Entradas</p>
+      </div>
+      <div class="metrica-card orange">
+        <p class="metrica-val">{{ salidas }}</p>
+        <p class="metrica-label">Salidas</p>
+      </div>
+      <div class="metrica-card purple">
+        <p class="metrica-val">{{ asistencias.length }}</p>
+        <p class="metrica-label">Total</p>
+      </div>
+    </div>
+
+    <!-- Lista -->
+    <div *ngIf="loading" *ngFor="let s of [1,2,3]" class="skeleton-item">
+      <ion-skeleton-text animated style="width:100%;height:52px;border-radius:14px"></ion-skeleton-text>
+    </div>
+
+    <div *ngFor="let a of asistencias" class="asist-item">
+      <div class="asist-icon" [style.background]="a.tipo === 'entrada' ? '#E1F5EE' : '#FAECE7'"
+        [style.color]="a.tipo === 'entrada' ? '#0F6E56' : '#993C1D'">
+        <ion-icon [name]="a.tipo === 'entrada' ? 'enter-outline' : 'exit-outline'"></ion-icon>
+      </div>
+      <div class="asist-info">
+        <p class="asist-tipo">{{ a.tipo | titlecase }}</p>
+        <p class="asist-fecha">{{ fechaFormato(a.fecha) }}</p>
+      </div>
+      <p class="asist-hora">{{ a.hora }}</p>
+    </div>
+
+    <p *ngIf="!loading && asistencias.length === 0" class="empty-text">Sin registros en este periodo</p>
+  </div>
+
+  <!-- INCIDENCIAS -->
+  <div *ngIf="tab === 'incidencias'" class="section">
+    <div *ngFor="let i of incidencias" class="incid-item">
+      <div class="incid-header">
+        <span class="incid-badge" [style.background]="gravBg(i.gravedad)" [style.color]="gravColor(i.gravedad)">
+          {{ i.gravedad }}
+        </span>
+        <p class="incid-fecha">{{ fechaFormato(i.fecha) }}</p>
+      </div>
+      <p class="incid-tipo">{{ i.tipo }}</p>
+      <p class="incid-desc">{{ i.descripcion }}</p>
+      <p class="incid-maestro">Reportado por: {{ i.maestro }}</p>
+      <div *ngIf="i.acuse" class="acuse-badge">✓ Acuse dado</div>
+    </div>
+    <p *ngIf="!loading && incidencias.length === 0" class="empty-text">Sin incidencias registradas</p>
+  </div>
+
+  <!-- CALIFICACIONES -->
+  <div *ngIf="tab === 'calificaciones'" class="section">
+    <div class="bimestres">
+      <button *ngFor="let b of [1,2,3,4,5]" class="bimestre-btn"
+        [class.active]="bimestre === b"
+        (click)="bimestre = b; cargarCalificaciones()">
+        {{ b }}° Bim
+      </button>
+    </div>
+
+    <div *ngFor="let c of calificaciones" class="calif-item">
+      <div class="calif-info">
+        <p class="calif-materia">{{ c.materia }}</p>
+        <p class="calif-periodo">Bimestre {{ c.bimestre }}</p>
+      </div>
+      <div class="calif-num" [class.aprobado]="c.calificacion >= 6" [class.reprobado]="c.calificacion < 6">
+        {{ c.calificacion }}
+      </div>
+    </div>
+    <p *ngIf="!loading && calificaciones.length === 0" class="empty-text">Sin calificaciones registradas</p>
+  </div>
+
+  <!-- AVISOS -->
+  <div *ngIf="tab === 'avisos'" class="section">
+    <div *ngFor="let a of avisos" class="aviso-item">
+      <div class="aviso-header-row">
+        <p class="aviso-titulo">{{ a.titulo }}</p>
+        <span *ngIf="a.grado" class="badge-grado">{{ a.grado }}° {{ a.grupo }}</span>
+        <span *ngIf="!a.grado" class="badge-general">General</span>
+      </div>
+      <p class="aviso-desc">{{ a.descripcion }}</p>
+      <p class="aviso-autor">{{ a.autor }} — {{ fechaFormato(a.created_at) }}</p>
+    </div>
+    <p *ngIf="avisos.length === 0" class="empty-text">Sin avisos</p>
+  </div>
+
+</ion-content>

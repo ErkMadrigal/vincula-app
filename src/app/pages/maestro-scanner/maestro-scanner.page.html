@@ -1,0 +1,92 @@
+<ion-content>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 class="header-title">Scanner QR</h1>
+    <p class="header-sub">{{ usuario?.nombre }}</p>
+
+    <!-- Tipo entrada/salida -->
+    <div class="tipo-selector">
+      <button class="tipo-btn" [class.active-entrada]="tipo === 'entrada'"
+        (click)="tipo = 'entrada'">
+        <ion-icon name="enter-outline"></ion-icon>
+        Entrada
+      </button>
+      <button class="tipo-btn" [class.active-salida]="tipo === 'salida'"
+        (click)="tipo = 'salida'">
+        <ion-icon name="exit-outline"></ion-icon>
+        Salida
+      </button>
+    </div>
+  </div>
+
+  <!-- Scanner -->
+  <div class="scanner-section">
+
+    <!-- Visor -->
+    <div class="scanner-container" [class.active]="scanning">
+      <div id="qr-reader" class="qr-reader"></div>
+      <div *ngIf="!scanning" class="scanner-placeholder">
+        <ion-icon name="scan-outline" class="scan-icon"></ion-icon>
+        <p>Toca el botón para escanear</p>
+      </div>
+      <!-- Marco animado -->
+      <div *ngIf="scanning" class="scan-frame">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="scan-line"></div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="btn-row">
+      <button *ngIf="!scanning" class="btn-scan" (click)="iniciarScanner()">
+        <ion-icon name="scan-outline"></ion-icon>
+        Escanear QR
+      </button>
+      <button *ngIf="scanning" class="btn-stop" (click)="detenerScanner()">
+        Detener
+      </button>
+      <button class="btn-manual" (click)="showManual = !showManual">
+        <ion-icon name="keypad-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Input manual -->
+    <div *ngIf="showManual" class="manual-input">
+      <input [(ngModel)]="uuidManual"
+        type="text"
+        placeholder="UUID del alumno..."
+        class="manual-field"
+        (keyup.enter)="registrar(uuidManual)" />
+      <button class="btn-registrar" (click)="registrar(uuidManual)"
+        [disabled]="!uuidManual || registrando">
+        <ion-spinner *ngIf="registrando" name="crescent"></ion-spinner>
+        <span *ngIf="!registrando">OK</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Resultado -->
+  <div *ngIf="ultimoRegistro" class="resultado"
+    [class.resultado-ok]="ultimoRegistro.exito"
+    [class.resultado-err]="!ultimoRegistro.exito">
+    <ion-icon [name]="ultimoRegistro.exito ? 'checkmark-circle-outline' : 'close-circle-outline'"
+      class="resultado-icon"></ion-icon>
+    <div class="resultado-info">
+      <p class="resultado-nombre">{{ ultimoRegistro.nombre }}</p>
+      <p class="resultado-msg">{{ ultimoRegistro.mensaje }}</p>
+    </div>
+    <p class="resultado-hora">{{ ultimoRegistro.hora }}</p>
+  </div>
+
+  <!-- Cargando -->
+  <div *ngIf="registrando" class="loading-overlay">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Registrando...</p>
+  </div>
+
+</ion-content>

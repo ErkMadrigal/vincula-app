@@ -1,0 +1,123 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="cargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <p class="header-greeting">¡Hola! 👋</p>
+        <h1 class="header-name">{{ usuario?.nombre?.split(' ')[0] }}</h1>
+      </div>
+      <div class="header-avatar">
+        {{ usuario?.nombre?.split(' ')[0]?.[0] }}{{ usuario?.nombre?.split(' ')[1]?.[0] }}
+      </div>
+    </div>
+
+    <div class="header-card">
+      <p class="header-card-label">Hijos registrados</p>
+      <p class="header-card-count">{{ hijos.length }}</p>
+    </div>
+
+
+  </div>
+
+  <!-- Hijos -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Mis hijos</h2>
+      <button class="btn-agregar" (click)="showVincularModal = true">
+        + Agregar hijo
+      </button>
+    </div>
+
+    <ng-container *ngIf="loading">
+      <div *ngFor="let s of [1,2]" class="hijo-skeleton">
+        <ion-skeleton-text animated style="width:48px;height:48px;border-radius:16px;flex-shrink:0"></ion-skeleton-text>
+        <div style="flex:1">
+          <ion-skeleton-text animated style="width:60%;height:14px;margin-bottom:6px"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width:40%;height:12px"></ion-skeleton-text>
+        </div>
+      </div>
+    </ng-container>
+
+    <div *ngFor="let h of hijos" class="hijo-card" (click)="verHijo(h)">
+      <div class="hijo-avatar">{{ iniciales(h.nombre) }}</div>
+      <div class="hijo-info">
+        <p class="hijo-nombre">{{ h.nombre }}</p>
+        <p class="hijo-grado">{{ h.grado }} — Grupo {{ h.grupo }}</p>
+        <span class="hijo-badge"
+          [class.badge-green]="h.pagado == 1"
+          [class.badge-red]="h.pagado == 0">
+          {{ h.pagado == 1 ? 'Al corriente' : 'Pago pendiente' }}
+        </span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="hijo-arrow"></ion-icon>
+    </div>
+
+    <div *ngIf="!loading && hijos.length === 0" class="empty">
+      <ion-icon name="school-outline"></ion-icon>
+      <p>No tienes hijos vinculados</p>
+    </div>
+  </div>
+
+  <!-- Accesos rápidos -->
+  <div class="section quick-section">
+    <h2 class="section-title">Accesos rápidos</h2>
+    <div class="quick-grid">
+      <button class="quick-btn" (click)="verHijo(hijos[0])" *ngIf="hijos.length > 0">
+        <div class="quick-icon blue"><ion-icon name="calendar-outline"></ion-icon></div>
+        <span>Asistencias</span>
+      </button>
+      <button class="quick-btn" (click)="verHijo(hijos[0])" *ngIf="hijos.length > 0">
+        <div class="quick-icon red"><ion-icon name="warning-outline"></ion-icon></div>
+        <span>Incidencias</span>
+      </button>
+      <button class="quick-btn" (click)="verHijo(hijos[0])" *ngIf="hijos.length > 0">
+        <div class="quick-icon green"><ion-icon name="document-text-outline"></ion-icon></div>
+        <span>Calificaciones</span>
+      </button>
+      <button class="quick-btn" (click)="verHijo(hijos[0])" *ngIf="hijos.length > 0">
+        <div class="quick-icon purple"><ion-icon name="notifications-outline"></ion-icon></div>
+        <span>Avisos</span>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Modal vincular hijo -->
+  <div *ngIf="showVincularModal" class="modal-overlay" (click)="showVincularModal = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">Vincular hijo</h2>
+      <p class="modal-sub">Ingresa las credenciales del alumno</p>
+
+      <div *ngIf="vincularError" class="alert-error">{{ vincularError }}</div>
+      <div *ngIf="vincularExito" class="alert-success">{{ vincularExito }}</div>
+
+      <div class="input-group">
+        <label class="input-label">CURP del alumno</label>
+        <input [(ngModel)]="vincularForm.curp" type="text" maxlength="18"
+          placeholder="MAFE990706HMCDLR05"
+          class="modal-input"
+          (input)="vincularForm.curp = vincularForm.curp.toUpperCase()" />
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Contraseña inicial del alumno</label>
+        <input [(ngModel)]="vincularForm.password" type="password"
+          placeholder="Primeros 8 caracteres de la CURP"
+          class="modal-input" />
+      </div>
+
+      <div class="modal-btns">
+        <button class="btn-cancel" (click)="cerrarVincularModal()">Cancelar</button>
+        <button class="btn-confirm" (click)="vincularHijo()" [disabled]="vinculando">
+          <ion-spinner *ngIf="vinculando" name="crescent"></ion-spinner>
+          <span *ngIf="!vinculando">Vincular</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

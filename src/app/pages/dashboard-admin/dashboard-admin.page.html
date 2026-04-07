@@ -1,0 +1,138 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="cargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <p class="header-role">{{ usuario?.rol | titlecase }} 🏫</p>
+        <h1 class="header-name">{{ usuario?.nombre?.split(' ')[0] }}</h1>
+        <p class="header-date">{{ fechaHoy }}</p>
+      </div>
+      <button class="scan-btn" (click)="irScanner()">
+        <ion-icon name="scan-outline"></ion-icon>
+        <span>Scanner</span>
+      </button>
+    </div>
+
+    <!-- Métricas rápidas -->
+    <div class="quick-metrics">
+      <div class="qm-item">
+        <p class="qm-value green">{{ metricas.entradas }}</p>
+        <p class="qm-label">Entradas</p>
+      </div>
+      <div class="qm-divider"></div>
+      <div class="qm-item">
+        <p class="qm-value orange">{{ metricas.salidas }}</p>
+        <p class="qm-label">Salidas</p>
+      </div>
+      <div class="qm-divider"></div>
+      <div class="qm-item">
+        <p class="qm-value red">{{ metricas.incidencias }}</p>
+        <p class="qm-label">Incidencias</p>
+      </div>
+      <div class="qm-divider"></div>
+      <div class="qm-item">
+        <p class="qm-value purple">{{ metricas.avisos }}</p>
+        <p class="qm-label">Avisos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagos -->
+  <div class="section">
+    <div class="pagos-card">
+      <div class="pagos-info">
+        <p class="pagos-label">Alumnos al corriente</p>
+        <p class="pagos-value">{{ metricas.pagados }} / {{ metricas.total_alumnos }}</p>
+        <p class="pagos-ingreso">${{ metricas.pagados * 15 | number }} ingreso del mes</p>
+      </div>
+      <div class="pagos-circle">
+        <p class="pagos-pct">
+          {{ metricas.total_alumnos > 0 ? ((metricas.pagados / metricas.total_alumnos) * 100 | number:'1.0-0') : 0 }}%
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Últimas asistencias -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Asistencias de hoy</h2>
+      <span class="section-count">{{ asistencias.length }}</span>
+    </div>
+
+    <div *ngIf="loading" class="skeleton-list">
+      <div *ngFor="let s of [1,2,3]" class="skeleton-item">
+        <ion-skeleton-text animated style="width:36px;height:36px;border-radius:12px"></ion-skeleton-text>
+        <div style="flex:1">
+          <ion-skeleton-text animated style="width:60%;height:13px;margin-bottom:4px"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width:40%;height:11px"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading">
+      <div *ngFor="let a of asistencias.slice(0,5)" class="list-item">
+        <div class="avatar" [style.background]="a.tipo === 'entrada' ? '#E1F5EE' : '#FAECE7'"
+          [style.color]="a.tipo === 'entrada' ? '#0F6E56' : '#993C1D'">
+          {{ iniciales(a.alumno) }}
+        </div>
+        <div class="item-info">
+          <p class="item-name">{{ a.alumno }}</p>
+          <p class="item-sub">{{ a.grado }} — {{ a.grupo }}</p>
+        </div>
+        <div class="item-right">
+          <span class="badge" [style.background]="a.tipo === 'entrada' ? '#E1F5EE' : '#FAECE7'"
+            [style.color]="a.tipo === 'entrada' ? '#0F6E56' : '#993C1D'">
+            {{ a.tipo }}
+          </span>
+          <p class="item-time">{{ a.hora }}</p>
+        </div>
+      </div>
+      <p *ngIf="asistencias.length === 0" class="empty-text">Sin asistencias hoy</p>
+    </div>
+  </div>
+
+  <!-- Incidencias recientes -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Incidencias hoy</h2>
+      <span class="section-count red-count">{{ metricas.incidencias_graves }} graves</span>
+    </div>
+
+    <div *ngIf="!loading">
+      <div *ngFor="let i of incidencias.slice(0,3)" class="list-item">
+        <div class="avatar" [style.background]="gravBg(i.gravedad)" [style.color]="gravColor(i.gravedad)">
+          {{ iniciales(i.alumno) }}
+        </div>
+        <div class="item-info">
+          <p class="item-name">{{ i.alumno }}</p>
+          <p class="item-sub">{{ i.tipo }} · {{ i.maestro }}</p>
+        </div>
+        <span class="badge" [style.background]="gravBg(i.gravedad)" [style.color]="gravColor(i.gravedad)">
+          {{ i.gravedad }}
+        </span>
+      </div>
+      <p *ngIf="incidencias.length === 0" class="empty-text">Sin incidencias hoy</p>
+    </div>
+  </div>
+
+  <!-- Avisos vigentes -->
+  <div class="section" style="padding-bottom: 24px;">
+    <div class="section-header">
+      <h2 class="section-title">Avisos vigentes</h2>
+      <span class="section-count">{{ metricas.avisos }}</span>
+    </div>
+    <div *ngIf="!loading">
+      <div *ngFor="let a of avisos.slice(0,3)" class="aviso-item">
+        <p class="aviso-titulo">{{ a.titulo }}</p>
+        <p class="aviso-sub">{{ a.autor }} · {{ a.grado || 'General' }}</p>
+      </div>
+      <p *ngIf="avisos.length === 0" class="empty-text">Sin avisos vigentes</p>
+    </div>
+  </div>
+
+</ion-content>

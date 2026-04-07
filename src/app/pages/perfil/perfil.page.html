@@ -1,0 +1,101 @@
+<ion-content>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="avatar-circle">{{ iniciales }}</div>
+    <h1 class="user-name">{{ usuario?.nombre }}</h1>
+    <p class="user-role">{{ usuario?.rol }}</p>
+    <div class="user-curp">{{ usuario?.curp }}</div>
+  </div>
+
+  <!-- Info -->
+  <div class="section">
+    <div class="info-card">
+      <div class="info-row">
+        <ion-icon name="school-outline" class="info-icon"></ion-icon>
+        <div>
+          <p class="info-label">Escuela ID</p>
+          <p class="info-value">{{ usuario?.escuela_id }}</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <ion-icon name="shield-checkmark-outline" class="info-icon"></ion-icon>
+        <div>
+          <p class="info-label">Rol</p>
+          <p class="info-value">{{ usuario?.rol }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cambiar contraseña -->
+  <div class="section">
+    <h2 class="section-title">Cambiar contraseña</h2>
+
+    <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+    <div *ngIf="exito" class="alert alert-success">{{ exito }}</div>
+
+    <div class="form-card">
+      <div class="input-group">
+        <label class="input-label">Contraseña actual</label>
+        <div class="input-wrapper">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input [(ngModel)]="form.password_old"
+            [type]="showOld ? 'text' : 'password'"
+            placeholder="Tu contraseña actual"
+            class="custom-input" />
+          <ion-icon [name]="showOld ? 'eye-off-outline' : 'eye-outline'"
+            class="input-icon-right" (click)="showOld = !showOld">
+          </ion-icon>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Nueva contraseña</label>
+        <div class="input-wrapper">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input [(ngModel)]="form.password_new"
+            [type]="showNew ? 'text' : 'password'"
+            placeholder="Mínimo 8 caracteres"
+            class="custom-input" />
+          <ion-icon [name]="showNew ? 'eye-off-outline' : 'eye-outline'"
+            class="input-icon-right" (click)="showNew = !showNew">
+          </ion-icon>
+        </div>
+
+        <!-- Fortaleza -->
+        <div *ngIf="form.password_new" class="strength-bar">
+          <div class="strength-track">
+            <div class="strength-fill" [style.width]="(fortaleza * 25) + '%'"
+              [style.background]="fortalezaColor"></div>
+          </div>
+          <p class="strength-label" [style.color]="fortalezaColor">{{ fortalezaLabel }}</p>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Confirmar nueva contraseña</label>
+        <div class="input-wrapper">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input [(ngModel)]="form.password_confirm"
+            type="password"
+            placeholder="Repite la nueva contraseña"
+            class="custom-input" />
+        </div>
+      </div>
+
+      <button class="btn-primary" (click)="cambiarPassword()" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : 'Cambiar contraseña' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Cerrar sesión -->
+  <div class="section logout-section">
+    <button class="btn-logout" (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      Cerrar sesión
+    </button>
+  </div>
+
+</ion-content>
