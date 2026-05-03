@@ -407,3 +407,85 @@ ion-content { --background: #F8F7FC; }
   font-size: 13px;
   padding: 24px 0;
 }
+
+.asist-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.asist-hora {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6B4FBB;
+  margin: 0 0 2px;
+}
+
+.asist-dia {
+  font-size: 10px;
+  color: #C4B8F0;
+  text-transform: capitalize;
+}
+
+.hijo-selector {
+  background: white;
+  border-radius: 16px;
+  margin-top: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.hijo-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #F4F2FB;
+  cursor: pointer;
+  &:last-child { border-bottom: none; }
+  &.selected { background: #F8F7FC; }
+}
+
+.option-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6B4FBB, #9B89D4);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.option-info { flex: 1; }
+
+.option-nombre {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E1252;
+  margin: 0 0 2px;
+}
+
+.option-grado {
+  font-size: 11px;
+  color: #9B89D4;
+  margin: 0;
+}
+
+.option-check {
+  color: #6B4FBB;
+  font-weight: 700;
+}
+
+.switch-icon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.switch-icon {
+  font-size: 16px;
+  vertical-align: middle;
+  opacity: 0.7;
+}

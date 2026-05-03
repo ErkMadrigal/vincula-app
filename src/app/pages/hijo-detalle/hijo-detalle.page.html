@@ -5,12 +5,30 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="hijo-avatar">{{ hijo?.nombre?.split(' ').slice(0,2).map((n:any) => n[0]).join('') }}</div>
-    <h1 class="hijo-nombre">{{ hijo?.nombre }}</h1>
+    <div class="hijo-avatar" (click)="showSelector = !showSelector">
+      {{ inicialesHijo }}
+    </div>
+    <h1 class="hijo-nombre" (click)="showSelector = !showSelector">
+      {{ hijo?.nombre }} <ion-icon name="chevron-down-outline" class="switch-icon"></ion-icon>
+    </h1>
     <p class="hijo-grado">{{ hijo?.grado }}° Grado — Grupo {{ hijo?.grupo }}</p>
     <span class="hijo-badge" [class.badge-green]="hijo?.pagado == 1" [class.badge-red]="hijo?.pagado == 0">
       {{ hijo?.pagado == 1 ? 'Al corriente' : 'Pago pendiente' }}
     </span>
+
+    <!-- Selector de hijos -->
+    <div *ngIf="showSelector" class="hijo-selector">
+      <div *ngFor="let h of hijos" class="hijo-option"
+        [class.selected]="h.uuid === uuid"
+        (click)="cambiarHijo(h)">
+        <div class="option-avatar">{{ inicialesNombre(h.nombre) }}</div>
+        <div class="option-info">
+          <p class="option-nombre">{{ h.nombre }}</p>
+          <p class="option-grado">{{ h.grado }}° — Grupo {{ h.grupo }}</p>
+        </div>
+        <span *ngIf="h.uuid === uuid" class="option-check">✓</span>
+      </div>
+    </div>
   </div>
 
   <!-- Tabs -->
@@ -77,12 +95,15 @@
     </div>
 
     <!-- Lista -->
-    <div *ngIf="loading" *ngFor="let s of [1,2,3]" class="skeleton-item">
-      <ion-skeleton-text animated style="width:100%;height:52px;border-radius:14px"></ion-skeleton-text>
-    </div>
+    <ng-container *ngIf="loading">
+      <div *ngFor="let s of [1,2,3]" class="skeleton-item">
+        <ion-skeleton-text animated style="width:100%;height:52px;border-radius:14px"></ion-skeleton-text>
+      </div>
+    </ng-container>
 
     <div *ngFor="let a of asistencias" class="asist-item">
-      <div class="asist-icon" [style.background]="a.tipo === 'entrada' ? '#E1F5EE' : '#FAECE7'"
+      <div class="asist-icon"
+        [style.background]="a.tipo === 'entrada' ? '#E1F5EE' : '#FAECE7'"
         [style.color]="a.tipo === 'entrada' ? '#0F6E56' : '#993C1D'">
         <ion-icon [name]="a.tipo === 'entrada' ? 'enter-outline' : 'exit-outline'"></ion-icon>
       </div>
@@ -90,7 +111,10 @@
         <p class="asist-tipo">{{ a.tipo | titlecase }}</p>
         <p class="asist-fecha">{{ fechaFormato(a.fecha) }}</p>
       </div>
-      <p class="asist-hora">{{ a.hora }}</p>
+      <div class="asist-right">
+        <p class="asist-hora">{{ formatHora(a.hora) }}</p>
+        <span class="asist-dia">{{ diaSemana(a.fecha) }}</span>
+      </div>
     </div>
 
     <p *ngIf="!loading && asistencias.length === 0" class="empty-text">Sin registros en este periodo</p>

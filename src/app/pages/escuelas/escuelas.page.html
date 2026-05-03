@@ -1,13 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>escuelas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="cargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">escuelas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Header -->
+  <div class="header">
+    <h1 class="header-title">Escuelas 🏫</h1>
+    <p class="header-sub">{{ escuelas.length }} escuelas registradas</p>
+  </div>
+
+  <!-- Lista -->
+  <div class="section">
+
+    <ng-container *ngIf="loading">
+      <div *ngFor="let s of [1,2,3]" class="skeleton-card">
+        <ion-skeleton-text animated style="width:100%;height:120px;border-radius:16px"></ion-skeleton-text>
+      </div>
+    </ng-container>
+
+    <div *ngFor="let e of escuelas" class="escuela-card">
+
+      <!-- Header -->
+      <div class="card-header">
+        <div class="escuela-icon">
+          <ion-icon name="school-outline"></ion-icon>
+        </div>
+        <div class="escuela-info">
+          <p class="escuela-nombre">{{ e.nombre }}</p>
+          <p class="escuela-sub">{{ e.subdominio }}.vincula.com.mx</p>
+        </div>
+        <span class="estado-badge" [class.activa]="e.activa == 1">
+          {{ e.activa == 1 ? 'Activa' : 'Inactiva' }}
+        </span>
+      </div>
+
+      <!-- Métricas -->
+      <div class="metricas">
+        <div class="metrica">
+          <ion-icon name="people-outline"></ion-icon>
+          <div>
+            <p class="met-val">{{ e.total_alumnos }}</p>
+            <p class="met-label">Alumnos</p>
+          </div>
+        </div>
+        <div class="metrica">
+          <ion-icon name="card-outline"></ion-icon>
+          <div>
+            <p class="met-val">{{ e.alumnos_pagados }}</p>
+            <p class="met-label">Pagados</p>
+          </div>
+        </div>
+        <div class="metrica">
+          <ion-icon name="business-outline"></ion-icon>
+          <div>
+            <p class="met-val green">${{ ingreso(e) }}</p>
+            <p class="met-label">Ingreso</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra progreso -->
+      <div class="progress-section">
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width]="porcentaje(e) + '%'"></div>
+        </div>
+        <p class="progress-label">{{ porcentaje(e) }}% al corriente</p>
+      </div>
+
+    </div>
+
+    <div *ngIf="!loading && escuelas.length === 0" class="empty">
+      <ion-icon name="school-outline"></ion-icon>
+      <p>Sin escuelas registradas</p>
+    </div>
+
+  </div>
 </ion-content>

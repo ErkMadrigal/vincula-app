@@ -1,0 +1,52 @@
+<svg width="1024" height="1024" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#1A0F4A"/>
+      <stop offset="100%" stop-color="#0A0620"/>
+    </radialGradient>
+    <radialGradient id="dotGrad" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#9B7FDB"/>
+      <stop offset="100%" stop-color="#5B3FA0"/>
+    </radialGradient>
+    <radialGradient id="capGrad" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#A98EE8"/>
+      <stop offset="100%" stop-color="#6B4FBB"/>
+    </radialGradient>
+    <radialGradient id="ring1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9B7FDB"/>
+      <stop offset="100%" stop-color="#6B4FBB"/>
+    </radialGradient>
+    <radialGradient id="ring2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B6FDB"/>
+      <stop offset="100%" stop-color="#5B3FA0"/>
+    </radialGradient>
+    <radialGradient id="ring3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7B5EA7"/>
+      <stop offset="100%" stop-color="#4A2F90"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="680" height="680" rx="150" fill="#FFFFFF"/>
+  <ellipse cx="200" cy="150" rx="200" ry="140" fill="#7B5EA7" opacity="0.07"/>
+
+  <circle cx="340" cy="440" r="192" fill="none" stroke="url(#ring3)" stroke-width="10" opacity="0.30"/>
+  <circle cx="340" cy="440" r="192" fill="none" stroke="#8B6FDB" stroke-width="5" opacity="0.18"/>
+  <circle cx="340" cy="440" r="142" fill="none" stroke="url(#ring2)" stroke-width="13" opacity="0.42"/>
+  <circle cx="340" cy="440" r="142" fill="none" stroke="#A89EE8" stroke-width="5" opacity="0.20"/>
+  <circle cx="340" cy="440" r="92"  fill="none" stroke="url(#ring1)" stroke-width="16" opacity="0.60"/>
+  <circle cx="340" cy="440" r="92"  fill="none" stroke="#C4B0F0" stroke-width="5" opacity="0.25"/>
+
+  <line x1="175" y1="165" x2="340" y2="440" stroke="#7B5EA7" stroke-width="72" stroke-linecap="round"/>
+  <line x1="505" y1="165" x2="340" y2="440" stroke="#7B5EA7" stroke-width="72" stroke-linecap="round"/>
+  <line x1="175" y1="165" x2="340" y2="440" stroke="#9B7FDB" stroke-width="28" stroke-linecap="round" opacity="0.55"/>
+  <line x1="505" y1="165" x2="340" y2="440" stroke="#9B7FDB" stroke-width="28" stroke-linecap="round" opacity="0.55"/>
+
+  <circle cx="175" cy="165" r="38" fill="url(#capGrad)"/>
+  <circle cx="505" cy="165" r="38" fill="url(#capGrad)"/>
+  <circle cx="163" cy="153" r="12" fill="white" opacity="0.18"/>
+  <circle cx="493" cy="153" r="12" fill="white" opacity="0.18"/>
+
+  <circle cx="340" cy="440" r="42" fill="#120840"/>
+  <circle cx="340" cy="440" r="28" fill="url(#dotGrad)"/>
+  <circle cx="328" cy="428" r="9" fill="white" opacity="0.20"/>
+</svg>

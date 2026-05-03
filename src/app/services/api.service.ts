@@ -4,7 +4,8 @@ import { Preferences } from '@capacitor/preferences';
 @Injectable({ providedIn: 'root' })
 export class ApiService {
 
-  private baseUrl = 'http://192.168.100.63/vincula-api/public/api';
+  private baseUrl = 'https://api.vincula365.com/api';
+  // private baseUrl = 'http://192.168.100.63/vincula-api/public/api';
   // Cambia TU_IP_LOCAL por tu IP real ej: 192.168.1.100
   // NO uses localhost porque el celular no lo resuelve
 

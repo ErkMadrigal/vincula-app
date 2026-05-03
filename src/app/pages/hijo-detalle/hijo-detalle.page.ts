@@ -7,10 +7,11 @@ import {
   IonSkeletonText, IonIcon, IonSegment, IonSegmentButton, IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+
 import {
   calendarOutline, warningOutline, documentTextOutline,
   megaphoneOutline, checkmarkCircleOutline, closeCircleOutline,
-  enterOutline, exitOutline
+  enterOutline, exitOutline, chevronDownOutline
 } from 'ionicons/icons';
 import { ApiService } from '../../services/api.service';
 
@@ -55,7 +56,7 @@ export class HijoDetallePage implements OnInit {
     addIcons({
       calendarOutline, warningOutline, documentTextOutline,
       megaphoneOutline, checkmarkCircleOutline, closeCircleOutline,
-      enterOutline, exitOutline,
+      enterOutline, exitOutline, chevronDownOutline,
     });
   }
 
@@ -66,11 +67,22 @@ export class HijoDetallePage implements OnInit {
     await this.cargarAvisos();
   }
 
+  hijos: any[]     = [];
+  showSelector     = false;
+
   async cargarHijo() {
     try {
       const data = await this.api.get('alumno/mis-hijos');
+      this.hijos = data.hijos;
       this.hijo  = data.hijos.find((h: any) => h.uuid === this.uuid);
     } catch {}
+  }
+
+  cambiarHijo(h: any) {
+    this.uuid        = h.uuid;
+    this.hijo        = h;
+    this.showSelector = false;
+    this.cargarAsistencias();
   }
 
   async cargarAsistencias() {
@@ -82,7 +94,7 @@ export class HijoDetallePage implements OnInit {
 
       if (this.filtroAsist === 'semana') {
         const d = new Date();
-        d.setDate(d.getDate() - d.getDay() + 1);
+        d.setDate(d.getDate() - d.getDay()); // desde domingo
         desde = d.toISOString().split('T')[0];
       } else if (this.filtroAsist === 'mes') {
         const d = new Date();
@@ -95,7 +107,7 @@ export class HijoDetallePage implements OnInit {
       const data = await this.api.get(
         `asistencia/rango/${this.uuid}?desde=${desde}&hasta=${hasta}`
       );
-      this.asistencias = data.asistencias || [];
+      this.asistencias = data.registros  || [];
     } catch {}
     finally { this.loading = false; }
   }
@@ -154,11 +166,34 @@ export class HijoDetallePage implements OnInit {
     });
   }
 
+  diaSemana(f: string): string {
+    return new Date(f + 'T12:00:00').toLocaleDateString('es-MX', { weekday: 'long' });
+  }
+
+  inicialesNombre(nombre: string): string {
+    return nombre?.split(' ').slice(0, 2).map((n: string) => n[0]).join('') || '?';
+  }
+
+  formatHora(hora: string): string {
+    const [h, m, s] = hora.split(':').map(Number);
+    const date = new Date();
+    date.setUTCHours(h, m, s);
+    return date.toLocaleTimeString('es-MX', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'America/Mexico_City'
+    });
+  }
+
   get entradas(): number {
     return this.asistencias.filter(a => a.tipo === 'entrada').length;
   }
 
   get salidas(): number {
     return this.asistencias.filter(a => a.tipo === 'salida').length;
+  }
+
+  get inicialesHijo(): string {
+    return this.hijo?.nombre?.split(' ').slice(0, 2).map((n: string) => n[0]).join('') || '?';
   }
 }

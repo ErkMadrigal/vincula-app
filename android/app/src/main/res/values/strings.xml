@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">vincula-app</string>
-    <string name="title_activity_main">vincula-app</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Vincúla365</string>
+    <string name="title_activity_main">Vincúla365</string>
+    <string name="package_name">com.vincula365.app</string>
+    <string name="custom_url_scheme">com.vincula365.app</string>
 </resources>

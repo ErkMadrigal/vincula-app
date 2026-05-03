@@ -1,0 +1,67 @@
+<svg width="100%" viewBox="0 0 690 690" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Ícono Vincula v2</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Ícono app con V gruesa morada y anillos de señal más pronunciados</desc>
+
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#1A0F4A"/>
+      <stop offset="100%" stop-color="#0A0620"/>
+    </radialGradient>
+    <radialGradient id="dotGrad" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#9B7FDB"/>
+      <stop offset="100%" stop-color="#5B3FA0"/>
+    </radialGradient>
+    <radialGradient id="capGrad" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#A98EE8"/>
+      <stop offset="100%" stop-color="#6B4FBB"/>
+    </radialGradient>
+    <radialGradient id="ring1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9B7FDB"/>
+      <stop offset="100%" stop-color="#6B4FBB"/>
+    </radialGradient>
+    <radialGradient id="ring2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B6FDB"/>
+      <stop offset="100%" stop-color="#5B3FA0"/>
+    </radialGradient>
+    <radialGradient id="ring3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7B5EA7"/>
+      <stop offset="100%" stop-color="#4A2F90"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="680" height="680" rx="150" fill="url(#bgGrad)" style="stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Brillo sutil esquina superior -->
+  <ellipse cx="200" cy="150" rx="200" ry="140" fill="#7B5EA7" opacity="0.07" style="fill:rgb(123, 94, 167);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.07;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Anillos gruesos con degradado — del más externo al interno -->
+  <circle cx="340" cy="440" r="192" fill="none" stroke="url(#ring3)" stroke-width="10" opacity="0.30" style="fill:none;color:rgb(0, 0, 0);stroke-width:10px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="340" cy="440" r="192" fill="none" stroke="#8B6FDB" stroke-width="5" opacity="0.18" style="fill:none;stroke:rgb(139, 111, 219);color:rgb(0, 0, 0);stroke-width:5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.18;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <circle cx="340" cy="440" r="142" fill="none" stroke="url(#ring2)" stroke-width="13" opacity="0.42" style="fill:none;color:rgb(0, 0, 0);stroke-width:13px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.42;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="340" cy="440" r="142" fill="none" stroke="#A89EE8" stroke-width="5" opacity="0.20" style="fill:none;stroke:rgb(168, 158, 232);color:rgb(0, 0, 0);stroke-width:5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.2;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <circle cx="340" cy="440" r="92" fill="none" stroke="url(#ring1)" stroke-width="16" opacity="0.60" style="fill:none;color:rgb(0, 0, 0);stroke-width:16px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="340" cy="440" r="92" fill="none" stroke="#C4B0F0" stroke-width="5" opacity="0.25" style="fill:none;stroke:rgb(196, 176, 240);color:rgb(0, 0, 0);stroke-width:5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.25;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- V gruesa — brazos -->
+  <line x1="175" y1="165" x2="340" y2="440" stroke="#7B5EA7" stroke-width="72" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(123, 94, 167);color:rgb(0, 0, 0);stroke-width:72px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="505" y1="165" x2="340" y2="440" stroke="#7B5EA7" stroke-width="72" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(123, 94, 167);color:rgb(0, 0, 0);stroke-width:72px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Highlight interno V -->
+  <line x1="175" y1="165" x2="340" y2="440" stroke="#9B7FDB" stroke-width="28" stroke-linecap="round" opacity="0.55" style="fill:rgb(0, 0, 0);stroke:rgb(155, 127, 219);color:rgb(0, 0, 0);stroke-width:28px;stroke-linecap:round;stroke-linejoin:miter;opacity:0.55;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="505" y1="165" x2="340" y2="440" stroke="#9B7FDB" stroke-width="28" stroke-linecap="round" opacity="0.55" style="fill:rgb(0, 0, 0);stroke:rgb(155, 127, 219);color:rgb(0, 0, 0);stroke-width:28px;stroke-linecap:round;stroke-linejoin:miter;opacity:0.55;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Caps superiores -->
+  <circle cx="175" cy="165" r="38" fill="url(#capGrad)" style="stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="505" cy="165" r="38" fill="url(#capGrad)" style="stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="163" cy="153" r="12" fill="white" opacity="0.18" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.18;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="493" cy="153" r="12" fill="white" opacity="0.18" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.18;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Punto central base -->
+  <circle cx="340" cy="440" r="42" fill="#120840" style="fill:rgb(18, 8, 64);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="340" cy="440" r="28" fill="url(#dotGrad)" style="stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="328" cy="428" r="9" fill="white" opacity="0.20" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.2;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+</svg>
