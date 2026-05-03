@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.vincula.app',
-  appName: 'Vincúla',
+  appId: 'com.vincula365.app',
+  appName: 'Vincúla365',
   webDir: 'www',
   android: {
     allowMixedContent: true,
